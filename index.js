@@ -27,11 +27,6 @@ fs.readdir("./commands/", (err, files) => {
   });
 });
 
-client.on("guildCreate", guild => {
-	console.log("Sono entrato in: " + guild.name);
-	client.channels.cache.get("731102904026660915").send(`Sono stato aggiunto a un nuovo server! Ora gestisco **${guild.memberCount}** membri in più!`);
-});
-
 const keepAlive = require('./server.js');
 keepAlive();
 
