@@ -1,31 +1,11 @@
-require("dotenv").config();
 const fs = require("fs");
 const { Collection, Client } = require("discord.js");
 const fetch = require('node-fetch');
-const got = require('got');
 const { RichEmbed  } = require('discord.js');
 
 const client = new Client();
 client.commands = new Collection();
 client.queue = new Map()
-client.config = {
-  prefix: process.env.PREFIX,
-	prefix: 'c!'
-}
-client.cooldown = new Set();
-client.cooldownTime = 3000;
-
-client.giveawaysManager.on("giveawayReactionAdded", (giveaway, member, reaction) => {
-    console.log(`${member.user.tag} entered giveaway #${giveaway.messageID} (${reaction.emoji.name})`);
-});
-
-client.giveawaysManager.on("giveawayReactionRemoved", (giveaway, member, reaction) => {
-    console.log(`${member.user.tag} unreact to giveaway #${giveaway.messageID} (${reaction.emoji.name})`);
-});
-
-client.giveawaysManager.on("giveawayEnded", (giveaway, winners) => {
-    console.log(`Giveaway #${giveaway.messageID} ended! Winners: ${winners.map((member) => member.user.username).join(', ')}`);
-});
 
 fs.readdir(__dirname + "/events/", (err, files) => {
   if (err) return console.error(err);
@@ -48,7 +28,13 @@ fs.readdir("./commands/", (err, files) => {
   });
 });
 
+client.on("guildCreate", guild => {
+	console.log("Sono entrato in: " + guild.name);
+	client.channels.cache.get("731102904026660915").send(`Sono stato aggiunto a un nuovo server! Ora gestisco **${guild.memberCount}** membri in più!`);
+});
+
 const keepAlive = require('./server.js');
 keepAlive();
 
-client.login(process.env.TOKEN)
+//Logging in to discord
+client.login('your_token')
