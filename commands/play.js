@@ -8,16 +8,13 @@ module.exports = {
     async run (client, message, args) {
         let channel = message.member.voice.channel;
         if (!channel) return sendError("You are not in a voice channel!", message.channel);
-
         const permissions = channel.permissionsFor(message.client.user);
         if (!permissions.has("CONNECT")) return sendError("I cannot connect in the channel you are on!", message.channel);
         if (!permissions.has("SPEAK")) return sendError("I cannot speak in the channel you are on!", message.channel);
-
         var searchString = args.join(" ");
         if (!searchString) return sendError("You didn't poivide want i want to play", message.channel);
         const url = args[0] ? args[0].replace(/<(.+)>/g, "$1") : "";
         var serverQueue = message.client.queue.get(message.guild.id);
-
         let songInfo;
         let song;
         if (url.match(/^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.?be)\/.+$/gi)) {
