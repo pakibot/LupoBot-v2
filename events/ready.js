@@ -11,4 +11,4 @@ module.exports = async (client) => {
     }
     setStatus();
     setInterval(() => setStatus(), 20000)
-  };
+};
