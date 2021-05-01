@@ -4,10 +4,7 @@ const { RichEmbed  } = require('discord.js');
 
 const client = new Client();
 client.commands = new Collection();
-client.queue = new Map()
-client.config = {
-	prefix: 'c!'
-}
+client.queue = new Map();
 
 fs.readdir(__dirname + "/events/", (err, files) => {
   if (err) return console.error(err);
