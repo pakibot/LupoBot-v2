@@ -3,7 +3,6 @@ const { Util, MessageEmbed } = require("discord.js");
 const ytdl = require("ytdl-core");
 const yts = require("yt-search");
 const sendError = require("../util/error");
-const scdl = require("soundcloud-downloader").default;
 module.exports = {
     name: "play",
     async run (client, message, args) {
@@ -65,11 +64,8 @@ module.exports = {
             let thing = new MessageEmbed()
                 .setAuthor("Song has been added to queue")
                 .setThumbnail(song.img)
-                .setColor("YELLOW")
-                .addField("Name", song.title, true)
-                .addField("Duration", song.duration, true)
-                .addField("Requested by", song.req.tag, true)
-                .setFooter(`Views: ${song.views} | ${song.ago}`);
+                .setColor("color")
+                .addField("Name", song.title, true);
             return message.channel.send(thing);
         }
         const queueConstruct = {
@@ -88,10 +84,10 @@ module.exports = {
             queueConstruct.connection = connection;
             play(queueConstruct.songs[0], message);
         } catch (error) {
-            console.error(`I can't join the voice chat!: ${error}`);
+            console.error(`I can't join the voice chat: ${error}`);
             message.client.queue.delete(message.guild.id);
             await channel.leave();
-            return sendError(`I could not join the voice channel: ${error}`, message.channel);
+            return sendError(`I can't join the voice chat: ${error}`, message.channel);
         }
     },
 };

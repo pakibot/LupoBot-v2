@@ -1,6 +1,5 @@
 const fs = require("fs");
 const { Collection, Client } = require("discord.js");
-const fetch = require('node-fetch');
 const { RichEmbed  } = require('discord.js');
 
 const client = new Client();
