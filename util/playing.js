@@ -8,25 +8,17 @@ module.exports = {
         const queue = message.client.queue.get(message.guild.id);
         if (!song) {
             sendError(
-                "Leaving the voice channel because I think there are no songs in the queue. If you like the bot stay 24/7 in voice channel go to `util/playing.js` and remove the line number 15\n\nThank you for using my code! [GitHub](https://github.com/SudhanPlayz/Discord-MusicBot)",
+                "Leaving the voice channel because I think there are no songs in the queue. \nThank you for using my code! [GitHub](https://github.com/DavidCavallaro)",
                 message.channel
             );
-            message.guild.me.voice.channel.leave(); //If you want your bot stay in vc 24/7 remove this line :D
+            message.guild.me.voice.channel.leave();
             message.client.queue.delete(message.guild.id);
             return;
         }
         let stream;
         let streamType;
-
         try {
-            if (song.url.includes("soundcloud.com")) {
-                try {
-                    stream = await scdl.downloadFormat(song.url, scdl.FORMATS.OPUS, client.config.SOUNDCLOUD);
-                } catch (error) {
-                    stream = await scdl.downloadFormat(song.url, scdl.FORMATS.MP3, client.config.SOUNDCLOUD);
-                    streamType = "unknown";
-                }
-            } else if (song.url.includes("youtube.com")) {
+            if (song.url.includes("youtube.com")) {
                 stream = await ytdlDiscord(song.url, { filter: "audioonly", quality: "highestaudio", highWaterMark: 1 << 25, opusEncoded: true });
                 streamType = "opus";
                 stream.on("error", function (er) {
@@ -44,9 +36,7 @@ module.exports = {
                 module.exports.play(queue.songs[0], message);
             }
         }
-
         queue.connection.on("disconnect", () => message.client.queue.delete(message.guild.id));
-
         const dispatcher = queue.connection
             .play(stream, { type: streamType })
             .on("finish", () => {
@@ -61,9 +51,7 @@ module.exports = {
                 queue.songs.shift();
                 module.exports.play(queue.songs[0], message);
             });
-
         dispatcher.setVolumeLogarithmic(queue.volume / 100);
-
         let thing = new MessageEmbed()
             .setAuthor("Started Playing Music!")
             .setThumbnail(song.img)
