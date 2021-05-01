@@ -7,10 +7,10 @@ Got any error or any problem with the code? Join [this](https://discord.gg/a9SHD
 ## ✨ Run the projects
 Repl:
 
-[![Run on Repl.it](https://github.com/DavidCavallaro/Bot-Musica/blob/main/replit.PNG?raw=true)](https://repl.it/github/DavidCavallaro/Bot-Musica)
+[![Run on Repl.it](https://github.com/DavidCavallaro/Music-Bot/blob/main/replit.PNG?raw=true)](https://repl.it/github/DavidCavallaro/Music-Bot)
 ## ✨ Contributors
-<a href="https://github.com/DavidCavallaro/Bot-Musica/graphs/contributors">
-  <img src="https://contributors-img.web.app/image?repo=DavidCavallaro/Bot-Musica" />
+<a href="https://github.com/DavidCavallaro/Music-Bot/graphs/contributors">
+  <img src="https://contributors-img.web.app/image?repo=DavidCavallaro/Music-Bot" />
 </a>
 
 Made with JavaScript!
