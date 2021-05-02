@@ -55,7 +55,7 @@ module.exports = {
         let thing = new MessageEmbed()
             .setAuthor("Started Playing Music!")
             .setThumbnail(song.img)
-            .setColor("BLUE")
+            .setColor("color")
             .addField("Name", song.title, true);
         queue.textChannel.send(thing);
     },
