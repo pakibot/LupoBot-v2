@@ -88,4 +88,4 @@ module.exports = {
             return sendError(`I can't join the voice chat: ${error}`, message.channel);
         }
     },
-};
+}
