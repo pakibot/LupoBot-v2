@@ -91,4 +91,4 @@ available at [http://contributor-covenant.org/version/1/4][version]
 [homepage]: http://contributor-covenant.org
 [version]: http://contributor-covenant.org/version/1/4/
 
-By @DavidCavallaro](https://github.com/DavidCavallaro)
+By [@DavidCavallaro](https://github.com/DavidCavallaro)
