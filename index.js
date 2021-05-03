@@ -6,7 +6,7 @@ const client = new Client();
 client.commands = new Collection();
 client.queue = new Map()
 client.config = {
-	prefix: 'your_prefix' //Set your prefix
+	prefix: 'l!' //Set your prefix
 }
 
 fs.readdir(__dirname + "/events/", (err, files) => {
@@ -33,4 +33,4 @@ fs.readdir("./commands/", (err, files) => {
 const keepAlive = require('./server.js');
 keepAlive();
 
-client.login('your_token') //Set your token
+client.login('ODMwNzc4ODM3MjU5OTExMTk5.YHLpFQ._6vUYqz-iK5ezXpE7fzz99pG6ZI') //Set your token
