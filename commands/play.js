@@ -39,5 +39,48 @@ module.exports = {
             console.error(error);
             return message.reply(error.message).catch(console.error);
         }
-        } 
+        } else {
+            try {
+              var searched = await yts.search(searchString);
+              if(searched.videos.length === 0)return sendError("Looks like i was unable to find the song on YouTube", message.channel)
+               songInfo = searched.videos[0]
+              song = {
+                id: songInfo.videoId,
+                title: Util.escapeMarkdown(songInfo.title),
+                views: String(songInfo.views).padStart(10, ' '),
+                url: songInfo.url,
+                ago: songInfo.ago,
+                duration: songInfo.duration.toString(),
+                img: songInfo.image,
+                req: message.author
+              };
+            } catch (error) {
+                  console.error(error);
+                  return message.reply(error.message).catch(console.error);
+            }
+          }
+          if (serverQueue) {
+               serverQueue.songs.push(song);
+            let thing = new MessageEmbed()
+                .setAuthor("Song has been added to queue.")
+                .setThumbnail(song.img)
+                .setColor("YELLOW")
+                .addField("Name:", song.title, true)
+                .addField("Requested by:", song.req.tag, true)
+                .setFooter(`- Service of Chill Castle`)
+            return message.channel.send(thing);
+          }
+      
+          const queueConstruct = {
+            textChannel: message.channel,
+            voiceChannel: channel,
+            connection: null,
+            songs: [],
+            volume: 80,
+            playing: true,
+            loop: false
+          };
+          message.client.queue.set(message.guild.id, queueConstruct);
+          queueConstruct.songs.push(song);
+      
     }
