@@ -82,5 +82,33 @@ module.exports = {
           };
           message.client.queue.set(message.guild.id, queueConstruct);
           queueConstruct.songs.push(song);
-      
+
+          const play = async (song) => {
+            const queue = message.client.queue.get(message.guild.id);
+          let afk = JSON.parse(fs.readFileSync("./afk.json", "utf8"));
+            if (!afk[message.guild.id]) afk[message.guild.id] = {
+            afk: false,
+          };
+          var online = afk[message.guild.id]
+          if (!song){
+            if (!online.afk) {
+              sendError("Leaving the voice channel because I think there are no songs in the queue.", message.channel)
+              message.guild.me.voice.channel.leave();
+              message.client.queue.delete(message.guild.id);
+            }
+            return message.client.queue.delete(message.guild.id);
+              }
+               let stream = null; 
+          if (song.url.includes("youtube.com")) {
+            stream = await ytdl(song.url);
+                  stream.on('error', function(er)  {
+            if (er) {
+              if (queue) {
+              queue.songs.shift();
+              play(queue.songs[0]);
+                  return sendError(`An unexpected error has occurred.\nPossible type \`${er}\``, message.channel)
+                }
+            }
+              });
+              }      
     }
